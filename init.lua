@@ -11,7 +11,7 @@ local Services = setmetatable({}, {
 local HttpService = Services.HttpService
 
 local function wipeFolders()
-    for _, v in {'koolaid', 'koolaid/libraries'} do
+    for _, v in {'koolaid', 'koolaid/libraries', 'koolaid/games'} do
         if isfolder(v) then
             for x, d in listfiles(v) do
                 if string.find(d, 'commit.txt') then continue end
