@@ -12,7 +12,7 @@ local Players = Services.Players
 local lplr = Players.LocalPlayer
 
 local ids = {
-    blindshot = {}
+    blindshot = {118614517739521}
 }
 
 local function downloadFile(file)
