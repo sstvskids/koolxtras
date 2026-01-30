@@ -50,7 +50,7 @@ for i,v in ids do
         local suc, res = pcall(downloadFile, 'koolaid/games/'..i)
 
         if not suc then
-            return error('Failed to download file: '..i)
+            return error('Failed to download file: '..debug.traceback(res))
         elseif res then
             return loadstring(res)()
         end
