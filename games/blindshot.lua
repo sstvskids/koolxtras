@@ -30,6 +30,8 @@ local Window = WindUI:CreateWindow({
 	IconSize = 24
 })
 
+Window:SetToggleKey(Enum.KeyCode.RightShift)
+
 do
     Window:Tag({
         Title = readfile('koolaid/commit.txt'),
