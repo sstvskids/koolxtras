@@ -34,8 +34,13 @@ Window:SetToggleKey(Enum.KeyCode.RightShift)
 
 do
     Window:Tag({
-        Title = readfile('koolaid/commit.txt'),
+        Title = 'v1.0.0',
         Icon = "github",
+        Border = true,
+    })
+
+	Window:Tag({
+        Title = 'beta',
         Border = true,
     })
 end
