@@ -27,7 +27,7 @@ end
 local function downloadFile(file)
     url = file:gsub('koolaid/', '')
     if not isfile(file) then
-        writefile(file, game:HttpGet('https://raw.githubusercontent.com/sstvskids/koolxtras/'..readfile('koolxtras/commit.txt')..'/'..url))
+        writefile(file, game:HttpGet('https://raw.githubusercontent.com/sstvskids/koolxtras/'..readfile('koolaid/commit.txt')..'/'..url))
     end
 
     repeat task.wait() until isfile(file)
