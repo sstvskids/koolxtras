@@ -56,6 +56,22 @@ local Tabs = {
 	},
 }
 
+Tabs.Combat = Tabs.Sections.Main:Tab({
+	Title = 'Combat',
+	Icon = 'sword',
+	IconColor = Purple,
+	IconShape = nil,
+	Border = true,
+})
+
+Tabs.Player = Tabs.Sections.Main:Tab({
+	Title = 'Player',
+	Icon = 'person-standing',
+	IconColor = Purple,
+	IconShape = nil,
+	Border = true,
+})
+
 Tabs.Themes = Tabs.Sections.Settings:Tab({
     Title = 'Themes',
     Icon = 'paintbrush',
@@ -67,14 +83,6 @@ Tabs.Themes = Tabs.Sections.Settings:Tab({
 Tabs.Config = Tabs.Sections.Settings:Tab({
 	Title = 'Configs',
 	Icon = 'solar:folder-with-files-bold',
-	IconColor = Purple,
-	IconShape = nil,
-	Border = true,
-})
-
-Tabs.Combat = Tabs.Sections.Main:Tab({
-	Title = 'Combat',
-	Icon = 'sword',
 	IconColor = Purple,
 	IconShape = nil,
 	Border = true,
@@ -92,6 +100,19 @@ end
 
 local Raycast = loadstring(downloadFile('koolaid/libraries/raycast.lua'))()
 local Entity = loadstring(downloadFile('koolaid/libraries/entity.lua'))()
+
+do
+    local ThemePicker
+    ThemePicker = Tabs.Themes:Dropdown({
+        Title = 'Theme',
+        Desc = 'Select a theme for the Wind Interface',
+        Values = WindUI:GetThemes(),
+        Value = WindUI:GetCurrentTheme(),
+        Callback = function(value)
+            WindUI:SetTheme(value)
+        end
+    })
+end
 
 do
     local ConfigManager = Window.ConfigManager
