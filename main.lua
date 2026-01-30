@@ -47,7 +47,9 @@ end
 
 for i,v in ids do
     if table.find(v, game.PlaceId) then
-        local suc, res = pcall(downloadFile, 'koolaid/games/'..i)
+        local suc, res = pcall(function()
+            return downloadFile('koolaid/games/'..i)
+        end)
 
         if not suc then
             return error('Failed to download file: '..debug.traceback(res))
