@@ -35,12 +35,14 @@ Window:SetToggleKey(Enum.KeyCode.RightShift)
 do
     Window:Tag({
         Title = 'v1.0.0',
-        Icon = "github",
+        Icon = 'github',
+		Color = 'Dark',
         Border = true,
     })
 
 	Window:Tag({
         Title = 'beta',
+		Color = 'Dark',
         Border = true,
     })
 end
@@ -98,16 +100,24 @@ local function downloadFile(file)
     return readfile(file)
 end
 
+print(WindUI:GetCurrentTheme())
+
 local Raycast = loadstring(downloadFile('koolaid/libraries/raycast.lua'))()
 local Entity = loadstring(downloadFile('koolaid/libraries/entity.lua'))()
 
 do
     local ThemePicker
+	local Themes = {}
+
+	for i,v in WindUI:GetThemes() do
+		table.insert(Themes, i)
+	end
+
     ThemePicker = Tabs.Themes:Dropdown({
         Title = 'Theme',
         Desc = 'Select a theme for the Wind Interface',
-        Values = WindUI:GetThemes(),
-        Value = WindUI:GetCurrentTheme(),
+        Values = Themes,
+		Value = WindUI:GetCurrentTheme(),
         Callback = function(value)
             WindUI:SetTheme(value)
         end
