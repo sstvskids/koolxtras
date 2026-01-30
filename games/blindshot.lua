@@ -36,13 +36,13 @@ do
     Window:Tag({
         Title = 'v1.0.0',
         Icon = 'github',
-		Color = 'Dark',
+		Color = Color3.fromHex("#1c1c1c"),
         Border = true,
     })
 
 	Window:Tag({
         Title = 'beta',
-		Color = 'Dark',
+		Color = Color3.fromHex("#1c1c1c"),
         Border = true,
     })
 end
