@@ -172,7 +172,25 @@ do
     local Speed, SpeedVal
     Speed = Tabs.Player:Toggle({
         Title = 'Speed',
-        Desc = 'Automatically adjusts how fast the player goes'
+        Desc = 'Automatically adjusts how fast the player goes',
+        Callback = function(value)
+            if value then
+                repeat
+                    if Entity.isAlive(lplr) and SpeedVal then
+                        local moveDir = lplr.Character.HumanoidRootPart.CFrame.LookVector
+                        lplr.Character.HumanoidRootPart.Velocity = Vector3.new(moveDir.X * SpeedVal, lplr.Character.HumanoidRootPart.Velocity.Y, moveDir.Z * SpeedVal)
+                    end
+
+                    task.wait()
+                until not Speed.Value
+            end
+        end
+    })
+    SpeedVal = Speed:Slider({
+        Title = 'Speed',
+        Min = 1,
+        Max = 100,
+        Value = 16
     })
 end
 
