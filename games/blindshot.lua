@@ -117,7 +117,7 @@ do
         Title = 'Theme',
         Desc = 'Select a theme for the Wind Interface',
         Values = Themes,
-		Value = WindUI:GetCurrentTheme(),
+		Value = 'Midnight',
         Callback = function(value)
             WindUI:SetTheme(value)
         end
