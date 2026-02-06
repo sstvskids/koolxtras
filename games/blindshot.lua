@@ -109,7 +109,7 @@ local Entity = loadstring(downloadFile('koolaid/libraries/entity.lua'))()
 do
     local AntiHit
     AntiHit = Tabs.Combat:Toggle({
-        Title = 'AntiHit',
+        Title = 'Anti Hit',
         Desc = 'Prevents you from getting hit by enemies',
         Callback = function(value)
             lplr.Character.Humanoid.HipHeight = value and -2 or 1
@@ -118,21 +118,21 @@ do
 end
 
 do
-    local AntiKnockback
-    AntiKnockback = Tabs.Combat:Toggle({
-        Title = 'AntiKnockback',
-        Desc = 'Prevents you from getting knocked back by enemies',
+    local Velocity
+    Velocity = Tabs.Combat:Toggle({
+        Title = 'Velocity',
+        Desc = 'Prevents you from taking knockback',
         Callback = function(value)
             if value then
                 repeat
-                    if entity.isAlive(lplr) then
+                    if Entity.isAlive(lplr) then
                         if lplr.Character.Humanoid.PlatformStand then
                             lplr.Character.Humanoid.Velocity = Vector3.new(lplr.Character.Humanoid.Velocity.X, 0, lplr.Character.Humanoid.Velocity.Z)
                         end
                     end
 
                     task.wait()
-                until not AntiKnockback.Value
+                until not Velocity.Value
             end
         end
     })
@@ -142,7 +142,7 @@ end
 do
     local AutoCash
     AutoCash = Tabs.Player:Toggle({
-        Title = 'AutoCash',
+        Title = 'Auto Cash',
         Desc = 'Automatically gives you cash within an interval of 20 seconds',
         Callback = function(value)
             if value then
@@ -156,7 +156,7 @@ do
                 end
 
                 repeat
-                    if firetouchinterest and entity.isAlive(lplr) then
+                    if firetouchinterest and Entity.isAlive(lplr) then
                         firetouchinterest(workspace._THINGS.Obby.Trophy, lplr.Character.HumanoidRootPart, 0)
                         firetouchinterest(workspace._THINGS.Obby.Trophy, lplr.Character.HumanoidRootPart, 1)
                     end
