@@ -22,7 +22,7 @@ local Window = WindUI:CreateWindow({
     MinSize = Vector2.new(560, 350),
     MaxSize = Vector2.new(900, 560),
     Transparent = true,
-    Theme = 'Midnight',
+    Theme = 'Dark',
     Resizable = true,
     SideBarWidth = 200,
     BackgroundImageTransparency = 0.42,
@@ -105,6 +105,77 @@ print(WindUI:GetCurrentTheme())
 local Raycast = loadstring(downloadFile('koolaid/libraries/raycast.lua'))()
 local Entity = loadstring(downloadFile('koolaid/libraries/entity.lua'))()
 
+-- Combat
+do
+    local AntiHit
+    AntiHit = Tabs.Combat:Toggle({
+        Title = 'AntiHit',
+        Desc = 'Prevents you from getting hit by enemies',
+        Callback = function(value)
+            lplr.Character.Humanoid.HipHeight = value and -2 or 1
+        end
+    })
+end
+
+do
+    local AntiKnockback
+    AntiKnockback = Tabs.Combat:Toggle({
+        Title = 'AntiKnockback',
+        Desc = 'Prevents you from getting knocked back by enemies',
+        Callback = function(value)
+            if value then
+                repeat
+                    if entity.isAlive(lplr) then
+                        if lplr.Character.Humanoid.PlatformStand then
+                            lplr.Character.Humanoid.Velocity = Vector3.new(lplr.Character.Humanoid.Velocity.X, 0, lplr.Character.Humanoid.Velocity.Z)
+                        end
+                    end
+
+                    task.wait()
+                until not AntiKnockback.Value
+            end
+        end
+    })
+end
+
+-- Player
+do
+    local AutoCash
+    AutoCash = Tabs.Player:Toggle({
+        Title = 'AutoCash',
+        Desc = 'Automatically gives you cash within an interval of 20 seconds',
+        Callback = function(value)
+            if value then
+                if not firetouchinterest then
+                    WindUI:Notify({
+                        Title = 'Failed to enable AutoCash',
+                        Desc = 'firetouchinterest: function returned nil'
+                    })
+
+                    return AutoCash:Set(false)
+                end
+
+                repeat
+                    if firetouchinterest and entity.isAlive(lplr) then
+                        firetouchinterest(workspace._THINGS.Obby.Trophy, lplr.Character.HumanoidRootPart, 0)
+                        firetouchinterest(workspace._THINGS.Obby.Trophy, lplr.Character.HumanoidRootPart, 1)
+                    end
+
+                    task.wait(20)
+                until not AutoCash.Value
+            end
+        end
+    })
+end
+
+do
+    local Speed, SpeedVal
+    Speed = Tabs.Player:Toggle({
+        Title = 'Speed',
+        Desc = 'Automatically adjusts how fast the player goes'
+    })
+end
+
 do
     local ThemePicker
 	local Themes = {}
@@ -117,7 +188,7 @@ do
         Title = 'Theme',
         Desc = 'Select a theme for the Wind Interface',
         Values = Themes,
-		Value = 'Midnight',
+		Value = 'Dark',
         Callback = function(value)
             WindUI:SetTheme(value)
         end
